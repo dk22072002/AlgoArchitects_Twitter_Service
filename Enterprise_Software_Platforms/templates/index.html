@@ -1,0 +1,51 @@
+<!-- Made by Kanwaljeet -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastodon API Integration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Mastodon API Integration</h1>
+        <form method="POST" class="mt-4">
+            <div class="form-group">
+                <label for="status">Enter status update:</label>
+                <input type="text" class="form-control" name="status" id="status" required>
+            </div>
+            <button type="submit" name="action" value="Post" class="btn btn-primary">Post</button>
+        </form>
+
+        <hr>
+
+        <h2>Retrieve/Delete Post</h2>
+        <form method="POST" class="mt-4">
+            <div class="form-group">
+                <label for="post_id">Enter Post ID:</label>
+                <input type="text" class="form-control" name="post_id" id="post_id" required>
+            </div>
+            <button type="submit" name="action" value="Retrieve" class="btn btn-info">Retrieve</button>
+            <button type="submit" name="action" value="Delete" class="btn btn-danger">Delete</button>
+        </form>
+
+        {% if post %}
+            <hr>
+            <h3>Post Details</h3>
+            <div class="alert alert-success">
+                <strong>Post ID:</strong> {{ post.id }}<br>
+                <strong>Content:</strong> {{ post.content|safe }}<br>
+                <strong>Created At:</strong> {{ post.created_at }}<br>
+                <strong>Visibility:</strong> {{ post.visibility }}
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="alert alert-danger">
+                <p>Error: {{ error }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
